@@ -23,27 +23,25 @@ const Toast: React.FC<ToastProps> = ({
   showProfile = true,
   position = "top-right",
 }) => {
-  const [isVisible, setIsVisible] = useState(visible);
+  const [closing, setClosing] = useState(false);
 
   useEffect(() => {
-    if (visible) {
-      setIsVisible(true);
-      const timer = setTimeout(() => {
-        setIsVisible(false);
-        setTimeout(() => onClose?.(), 300);
-      }, 4000);
-      return () => clearTimeout(timer);
-    } else {
-      setIsVisible(false);
-    }
+    if (!visible) return;
+
+    const timer = setTimeout(() => {
+      setClosing(true);
+      setTimeout(() => onClose?.(), 300);
+    }, 4000);
+
+    return () => clearTimeout(timer);
   }, [visible, onClose]);
 
   const handleClose = () => {
-    setIsVisible(false);
+    setClosing(true);
     setTimeout(() => onClose?.(), 300);
   };
 
-  if (!visible && !isVisible) return null;
+  if (!visible && !closing) return null;
 
   const getPositionClass = (pos: string) => {
     switch (pos) {
@@ -61,14 +59,12 @@ const Toast: React.FC<ToastProps> = ({
   };
 
   const getAnimationClass = (pos: string) => {
+    const hide = closing || !visible;
+
     if (pos.includes("right")) {
-      return isVisible
-        ? "translate-x-0 opacity-100"
-        : "translate-x-full opacity-0";
+      return hide ? "translate-x-full opacity-0" : "translate-x-0 opacity-100";
     } else {
-      return isVisible
-        ? "translate-x-0 opacity-100"
-        : "-translate-x-full opacity-0";
+      return hide ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100";
     }
   };
 
