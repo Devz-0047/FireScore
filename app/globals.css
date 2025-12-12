@@ -1,26 +1,88 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* custom fonts */
+  --font-display: "Satoshi", sans-serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* custom fonts sizes */
+  --font-size-large: 22px;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* custom colors */
+  --color-pre-primary: #F2EBFB; /* purple/50 */
+  --color-primary: #8243E6;   /* purple/500 */
+  --color-secondary: #753CCF; /* purple/600 */
+  --color-cloud: #F9FAFB;     /* gray/50 */
+  --color-mist: #F3F4F6;      /* gray/100 */
+  --color-fog: #EAECF0;       /* gray/200 */
+  --color-silver: #D1D5DB;    /* gray/300 */
+  --color-smoke: #9CA3AF;     /* gray/400 */
+  --color-stone: #6B7280;     /* gray/500 */
+  --color-slate: #4B5563;     /* gray/600 */
+  --color-ink: #151F2D;       /* gray/800 */
+  --color-abyss: #000413;     /* gray/900 */
+
+  --color-alert: #C62828;     /* Status/Alert */
+  --color-warning: #FFA500;   /* Status/Warning */
+  --color-success: #4AA564;   /* Status/Success */
+
+  --color-flame: #EF4800; 
+  --color-sunbeam: #FFA90F;
+  --color-indigo: #0140B5;
+  --color-emerald: #00BD5C;
+  --color-ocean: #006DC7;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-display);
+}
+
+.shadow-light {
+  box-shadow: 0 4px 6px rgba(177, 174, 174, 0.1); /* Light shadow */
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.scroll-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+
+.scroll-hide::-webkit-scrollbar {
+  display: none;            /* Chrome, Safari and Opera */
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: ink; /* Customize as needed */
+  border-radius: 2px;
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: silver transparent; /* Firefox */
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
 }
